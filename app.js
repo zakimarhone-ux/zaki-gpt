@@ -13,7 +13,13 @@ function addBalance(amount) {
 }
 
 function addExpense(name, amount, category) {
-  if (Number(amount) > balance) {
+
+  if (!name || !amount) {
+    alert("أدخل معلومات المصروف");
+    return;
+  }
+
+  if (Number(amount) > Number(balance)) {
     alert("الرصيد غير كافي");
     return;
   }
@@ -22,10 +28,11 @@ function addExpense(name, amount, category) {
     name: name,
     amount: Number(amount),
     category: category,
-    date: new Date().toLocaleDateString()
+    date: new Date().toLocaleDateString("ar-DZ")
   };
 
-  expenses.push(expense);
+  expenses.unshift(expense);
+
   balance = Number(balance) - Number(amount);
 
   saveData();
@@ -33,34 +40,62 @@ function addExpense(name, amount, category) {
 }
 
 function deleteExpense(index) {
+
   balance = Number(balance) + Number(expenses[index].amount);
-  expenses.splice(index, 1);
+
+  expenses.splice(index,1);
+
   saveData();
   updateScreen();
 }
 
+
 function updateScreen() {
+
   let balanceBox = document.getElementById("balance");
-  if (balanceBox) {
+
+  if(balanceBox){
     balanceBox.innerHTML = balance + " DA";
   }
 
+
   let list = document.getElementById("expenseList");
 
-  if (list) {
+  if(list){
+
     list.innerHTML = "";
 
-    expenses.forEach((item, index) => {
+    let total = 0;
+
+    expenses.forEach((item,index)=>{
+
+      total += Number(item.amount);
+
       list.innerHTML += `
-      <div>
-      ${item.date} - ${item.category}
-      <br>
-      ${item.name}: ${item.amount} DA
-      <button onclick="deleteExpense(${index})">حذف</button>
+      <div class="expense">
+
+      📅 ${item.date}<br>
+      🗂️ ${item.category}<br>
+      📝 ${item.name}<br>
+      💰 ${item.amount} DA
+
+      <button onclick="deleteExpense(${index})">
+      حذف
+      </button>
+
       </div>
       `;
+
     });
+
+
+    list.innerHTML += `
+    <hr>
+    📊 مجموع المصاريف: ${total} DA
+    `;
+
   }
+
 }
 
 updateScreen();
