@@ -1,100 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مصاريف الشانطي</title>
 
-<style>
-body {
-  font-family: Arial;
-  padding: 20px;
-  background:#f5f5f5;
-}
+<title>إدارة الشانطيات</title>
 
-.box {
-  background:white;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:10px;
-}
-
-input, select, button {
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-}
-
-button {
-  background:#222;
-  color:white;
-  border:none;
-  border-radius:5px;
-}
-
-.expense {
-  border-bottom:1px solid #ddd;
-  padding:10px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<h2>💰 مصاريف الشانطي</h2>
+<div class="header">
+🏗️ الشانطيات
+</div>
 
-<div class="box">
-<h3>الرصيد</h3>
-<h2 id="balance">0 DA</h2>
+<div class="container">
 
-<input id="balanceInput" type="number" placeholder="إضافة رصيد">
-<button onclick="addBalance(document.getElementById('balanceInput').value)">
-إضافة الرصيد
+<input
+type="text"
+class="search"
+placeholder="🔍 ابحث عن شانطي..."
+id="search">
+
+<div id="projects">
+
+<div class="card">
+
+<h3>🏗️ فيلا حي النخيل</h3>
+
+<p>💰 الرصيد : 120000 DA</p>
+
+<p>💸 المصروف : 38500 DA</p>
+
+<p>📅 آخر تحديث : اليوم</p>
+
+</div>
+
+<div class="card">
+
+<h3>🏢 عمارة الإخوة</h3>
+
+<p>💰 الرصيد : 300000 DA</p>
+
+<p>💸 المصروف : 124000 DA</p>
+
+<p>📅 آخر تحديث : أمس</p>
+
+</div>
+
+</div>
+
+<button class="addBtn">
+
+➕ إنشاء شانطي جديد
+
 </button>
-</div>
-
-
-<div class="box">
-
-<h3>إضافة مصروف</h3>
-
-<input id="expenseName" placeholder="اسم المصروف">
-
-<input id="expenseAmount" type="number" placeholder="المبلغ">
-
-<select id="expenseCategory">
-<option>وقود</option>
-<option>أكل</option>
-<option>مواد</option>
-<option>أجور</option>
-<option>أخرى</option>
-</select>
-
-<button onclick="
-addExpense(
-document.getElementById('expenseName').value,
-document.getElementById('expenseAmount').value,
-document.getElementById('expenseCategory').value
-)">
-حفظ المصروف
-</button>
 
 </div>
-
-
-<div class="box">
-
-<h3>قائمة المصاريف</h3>
-
-<div id="totalExpense"></div>
-
-<div id="expenseList"></div>
-
-</div>
-
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
