@@ -52,21 +52,6 @@ addBtn.addEventListener("click", function () {
 
     renderProjects();
 
-});
-
-    let name = prompt("اسم الشانطي");
-
-    if (!name) return;
-
-    projects.push({
-        name: name,
-        balance: 0
-    });
-
-    saveProjects();
-
-    renderProjects();
-
 };
 
 search.oninput = function () {
