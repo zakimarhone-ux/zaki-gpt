@@ -1,3 +1,5 @@
+alert("app.js يعمل");
+
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
 const projectsDiv = document.getElementById("projects");
