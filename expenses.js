@@ -24,8 +24,13 @@ const table = document.getElementById("expensesTable");
 projectName.textContent = project.name;
 
 function save() {
-    projects[currentProject] = project;
+    projects[currentProject] = {
+        ...project
+    };
+
     localStorage.setItem("projects", JSON.stringify(projects));
+
+    project = projects[currentProject];
 }
 
 function updateTotals() {
@@ -70,13 +75,15 @@ saveBalance.onclick = function () {
         return;
     }
 
-    project.balance = parseFloat(balanceInput.value);
+    project.balance = Number(balanceInput.value);
 
-    save();
+    projects[currentProject] = project;
 
-    updateTotals();
+    localStorage.setItem("projects", JSON.stringify(projects));
 
-    alert("تم حفظ الرصيد بنجاح");
+    renderExpenses();
+
+    alert("تم حفظ الرصيد");
 
 };
 addExpense.onclick = function () {
