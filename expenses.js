@@ -122,3 +122,30 @@ addExpense.onclick = function () {
 };
 
 renderExpenses();
+function deleteExpense(index){
+
+    if(!confirm("هل تريد حذف هذا المصروف؟")) return;
+
+    project.expenses.splice(index,1);
+
+    save();
+
+    renderExpenses();
+
+}
+
+function editExpense(index){
+
+    expenseName.value = project.expenses[index].name;
+
+    expenseAmount.value = project.expenses[index].amount;
+
+    expenseCategory.value = project.expenses[index].category;
+
+    project.expenses.splice(index,1);
+
+    save();
+
+    renderExpenses();
+
+}
