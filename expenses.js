@@ -37,7 +37,7 @@ function updateTotals() {
 
     let total = 0;
 
-    project.expenses.forEach(exp => {
+    project.expenses.forEach((exp, index) => {
         total += Number(exp.amount);
     });
 
