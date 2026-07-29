@@ -1,5 +1,3 @@
-alert("app.js يعمل");
-
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
 const projectsDiv = document.getElementById("projects");
@@ -37,7 +35,24 @@ function renderProjects(filter = "") {
 
 }
 
-addBtn.onclick = function () {
+addBtn.addEventListener("click", function () {
+
+    alert("تم الضغط على الزر");
+
+    let name = prompt("اسم الشانطي");
+
+    if (!name) return;
+
+    projects.push({
+        name: name,
+        balance: 0
+    });
+
+    saveProjects();
+
+    renderProjects();
+
+});
 
     let name = prompt("اسم الشانطي");
 
