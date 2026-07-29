@@ -16,7 +16,8 @@ const expenseAmount = document.getElementById("expenseAmount");
 const expenseCategory = document.getElementById("expenseCategory");
 
 const addExpense = document.getElementById("addExpense");
-const setBalance = document.getElementById("setBalance");
+const balanceInput = document.getElementById("balanceInput");
+const saveBalance = document.getElementById("saveBalance");
 
 const table = document.getElementById("expensesTable");
 
@@ -60,13 +61,13 @@ function renderExpenses() {
     updateTotals();
 }
 
-setBalance.onclick = function () {
+balanceInput.value = project.balance;
 
-    const value = prompt("أدخل الرصيد الأصلي", project.balance);
+saveBalance.onclick = function () {
 
-    if (value === null) return;
+    if (balanceInput.value.trim() === "") return;
 
-    project.balance = Number(value);
+    project.balance = Number(balanceInput.value);
 
     save();
 
