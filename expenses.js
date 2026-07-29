@@ -1,3 +1,4 @@
+alert("expenses.js اشتغل");
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 let currentProject = Number(localStorage.getItem("currentProject"));
 
