@@ -65,16 +65,20 @@ balanceInput.value = project.balance;
 
 saveBalance.onclick = function () {
 
-    if (balanceInput.value.trim() === "") return;
+    if (balanceInput.value.trim() === "") {
+        alert("اكتب الرصيد أولاً");
+        return;
+    }
 
-    project.balance = Number(balanceInput.value);
+    project.balance = parseFloat(balanceInput.value);
 
     save();
 
     updateTotals();
 
-};
+    alert("تم حفظ الرصيد بنجاح");
 
+};
 addExpense.onclick = function () {
 
     if (expenseName.value.trim() === "" || expenseAmount.value.trim() === "")
