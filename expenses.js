@@ -147,5 +147,6 @@ function editExpense(index){
     save();
 
     renderExpenses();
-
+window.editExpense = editExpense;
+window.deleteExpense = deleteExpense;
 }
