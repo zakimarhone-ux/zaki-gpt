@@ -12,57 +12,62 @@ function renderProjects(filter = "") {
 
     projectsDiv.innerHTML = "";
 
-    let list = projects.filter(p =>
-        p.name.toLowerCase().includes(filter.toLowerCase())
+    const list = projects.filter(project =>
+        project.name.toLowerCase().includes(filter.toLowerCase())
     );
 
     if (list.length === 0) {
-        projectsDiv.innerHTML =
-        "<p style='text-align:center'>لا توجد شانطيات.</p>";
+        projectsDiv.innerHTML = `
+            <p style="text-align:center;padding:20px;color:#777">
+                لا توجد شانطيات
+            </p>
+        `;
         return;
     }
 
-    list.forEach((project, index) => {
+    list.forEach(project => {
+
+        const realIndex = projects.indexOf(project);
 
         projectsDiv.innerHTML += `
-        <div class="card" onclick="openProject(${index})">
-            <h3>🏗️ ${project.name}</h3>
-            <p>💰 الرصيد : ${project.balance} DA</p>
-        </div>
+            <div class="card" onclick="openProject(${realIndex})">
+                <h3>🏗️ ${project.name}</h3>
+                <p>💰 الرصيد : ${project.balance} DA</p>
+            </div>
         `;
 
     });
 
 }
 
-addBtn.addEventListener("click", function () {
+addBtn.addEventListener("click", () => {
 
-    alert("تم الضغط على الزر");
+    const name = prompt("اسم الشانطي");
 
-    let name = prompt("اسم الشانطي");
-
-    if (!name) return;
+    if (!name || name.trim() === "") return;
 
     projects.push({
-        name: name,
-        balance: 0
+        name: name.trim(),
+        balance: 0,
+        expenses: []
     });
 
     saveProjects();
 
-    renderProjects();
+    renderProjects(search.value);
 
-};
+});
 
-search.oninput = function () {
-    renderProjects(this.value);
-};
+search.addEventListener("input", () => {
+    renderProjects(search.value);
+});
 
-renderProjects();
-function openProject(index){
+function openProject(index) {
 
     localStorage.setItem("currentProject", index);
 
     window.location.href = "chantier.html";
 
 }
+
+renderProjects();
