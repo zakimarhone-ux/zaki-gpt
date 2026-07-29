@@ -25,7 +25,7 @@ function renderProjects(filter = "") {
     list.forEach((project, index) => {
 
         projectsDiv.innerHTML += `
-        <div class="card">
+        <div class="card" onclick="openProject(${index})">
             <h3>🏗️ ${project.name}</h3>
             <p>💰 الرصيد : ${project.balance} DA</p>
         </div>
@@ -74,3 +74,10 @@ search.oninput = function () {
 };
 
 renderProjects();
+function openProject(index){
+
+    localStorage.setItem("currentProject", index);
+
+    window.location.href = "chantier.html";
+
+}
