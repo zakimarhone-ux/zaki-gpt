@@ -3,57 +3,81 @@ let currentProject = Number(localStorage.getItem("currentProject"));
 
 let project = projects[currentProject];
 
+if (!project.expenses) project.expenses = [];
+if (!project.balance) project.balance = 0;
+
 const projectName = document.getElementById("projectName");
-const balance = document.getElementById("balance");
-const table = document.getElementById("expensesTable");
+const initialBalance = document.getElementById("initialBalance");
+const totalExpenses = document.getElementById("totalExpenses");
+const remainingBalance = document.getElementById("remainingBalance");
 
 const expenseName = document.getElementById("expenseName");
 const expenseAmount = document.getElementById("expenseAmount");
 const expenseCategory = document.getElementById("expenseCategory");
-const addExpense = document.getElementById("addExpense");
 
-if (!project.expenses) {
-    project.expenses = [];
-}
+const addExpense = document.getElementById("addExpense");
+const setBalance = document.getElementById("setBalance");
+
+const table = document.getElementById("expensesTable");
 
 projectName.textContent = project.name;
 
-function updateBalance() {
+function save() {
+    projects[currentProject] = project;
+    localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function updateTotals() {
 
     let total = 0;
 
-    project.expenses.forEach(e => {
-        total += Number(e.amount);
+    project.expenses.forEach(exp => {
+        total += Number(exp.amount);
     });
 
-    balance.textContent = total + " DA";
-
+    initialBalance.textContent = project.balance + " DA";
+    totalExpenses.textContent = total + " DA";
+    remainingBalance.textContent = (project.balance - total) + " DA";
 }
 
 function renderExpenses() {
 
     table.innerHTML = "";
 
-    project.expenses.forEach(e => {
+    project.expenses.forEach((exp) => {
 
         table.innerHTML += `
         <tr>
-            <td>${e.date}</td>
-            <td>${e.name}</td>
-            <td>${e.category}</td>
-            <td>${e.amount} DA</td>
+            <td>${exp.date}</td>
+            <td>${exp.name}</td>
+            <td>${exp.category}</td>
+            <td>${exp.amount} DA</td>
         </tr>
         `;
 
     });
 
-    updateBalance();
-
+    updateTotals();
 }
+
+setBalance.onclick = function () {
+
+    const value = prompt("أدخل الرصيد الأصلي", project.balance);
+
+    if (value === null) return;
+
+    project.balance = Number(value);
+
+    save();
+
+    updateTotals();
+
+};
 
 addExpense.onclick = function () {
 
-    if (expenseName.value === "" || expenseAmount.value === "") return;
+    if (expenseName.value.trim() === "" || expenseAmount.value.trim() === "")
+        return;
 
     project.expenses.push({
 
@@ -67,12 +91,10 @@ addExpense.onclick = function () {
 
     });
 
-    projects[currentProject] = project;
-
-    localStorage.setItem("projects", JSON.stringify(projects));
-
     expenseName.value = "";
     expenseAmount.value = "";
+
+    save();
 
     renderExpenses();
 
