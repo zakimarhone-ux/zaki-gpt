@@ -53,13 +53,22 @@ function renderExpenses() {
     project.expenses.forEach((exp) => {
 
         table.innerHTML += `
-        <tr>
-            <td>${exp.date}</td>
-            <td>${exp.name}</td>
-            <td>${exp.category}</td>
-            <td>${exp.amount} DA</td>
-        </tr>
-        `;
+<tr>
+    <td>${exp.date}</td>
+    <td>${exp.name}</td>
+    <td>${exp.category}</td>
+    <td>${exp.amount} DA</td>
+
+    <td>
+        <button onclick="editExpense(${index})">✏️</button>
+    </td>
+
+    <td>
+        <button onclick="deleteExpense(${index})">🗑️</button>
+    </td>
+
+</tr>
+`;
 
     });
 
