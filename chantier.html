@@ -1,1 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الشانطي</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<button onclick="history.back()" style="float:left;background:none;border:none;color:white;font-size:22px;">
+⬅️
+</button>
+
+<h1 id="projectName">الشانطي</h1>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>💰 الرصيد</h2>
+
+<h1 id="balance">0 DA</h1>
+
+</div>
+
+<div class="card">
+
+<input
+id="expenseName"
+class="search"
+type="text"
+placeholder="اسم المصروف">
+
+<input
+id="expenseAmount"
+class="search"
+type="number"
+placeholder="المبلغ">
+
+<select id="expenseCategory" class="search">
+
+<option>مواد</option>
+<option>وقود</option>
+<option>أجور</option>
+<option>معدات</option>
+<option>أخرى</option>
+
+</select>
+
+<button id="addExpense">
+➕ إضافة مصروف
+</button>
+
+</div>
+
+<div class="card">
+
+<table width="100%">
+
+<thead>
+
+<tr>
+
+<th>📅</th>
+
+<th>البيان</th>
+
+<th>التصنيف</th>
+
+<th>المبلغ</th>
+
+</tr>
+
+</thead>
+
+<tbody id="expensesTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="expenses.js"></script>
+
+</body>
+
+</html>
